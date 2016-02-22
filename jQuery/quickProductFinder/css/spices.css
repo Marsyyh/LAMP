@@ -1,0 +1,22 @@
+.wrapper{
+	border-width: 0px 1px 1px 1px;
+	border: solid;
+}
+.product1{
+	height: 150px;
+	background-color: rgb(135,0,0);
+}
+.product2{
+	height: 150px;
+	background-color: rgb(0,135,0);
+}
+.product3{
+	height: 150px;
+	background-color: rgb(0,0,135);
+}
+.productConsole{
+	height: 150px;
+}
+.column2, .column3, .column4, .column5{
+	visibility: visible;
+}

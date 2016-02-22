@@ -1,0 +1,12 @@
+.wrapper{
+	border-width: 0px 1px 1px 1px;
+	border: solid;
+}
+.productConsole{
+	height: 150px;
+}
+.column1, .column2, .column3, .column4, .column5{
+	height: 600px;
+	visibility: visible;
+	overflow: scroll;
+}
