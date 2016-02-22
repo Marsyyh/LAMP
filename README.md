@@ -1,2 +1,2 @@
 # LAMP
-Learn and Exciting (
+Learn and Exciting
