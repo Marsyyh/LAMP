@@ -1,0 +1,19 @@
+body{
+	background-color:#bfff00;
+	color:#0080ff;	
+}
+.header{
+	height:100px;
+	text-align:center;
+	font-size:x-large;
+	margin-top:50px;
+}
+.body{
+	height:800px;
+	background-color:#FFFFFF;
+	margin:0px 200px 0px 200px;
+	overflow:scroll;
+}
+.Button{
+	text-align:center;
+}

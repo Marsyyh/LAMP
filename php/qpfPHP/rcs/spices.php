@@ -7,16 +7,25 @@ if($fileholder = fopen("spices.txt","r")){
 		$arr = preg_split("/[\s\n\t]/",$str);
 		//$arr = explode(" ",$str);
 		if($arr[0] && substr($arr[0],-1)!="x"){
+			$tmpStr = "";
 			for ($i = 1; $i < count($arr); $i++) {
-				$resultArr[$arr[0]] .= $arr[$i]." ";
+				$tmpStr .= $arr[$i]." ";
 			}
+			if(!isset($resultArr[$arr[0]])){
+				$resultArr[$arr[0]] = $tmpStr;
+			}
+			$tmpArr = array($arr[0] => $tmpStr);
 		}elseif($arr[0]) {
 			$tmp = substr($arr[0],0,-1);
 			$tmpCount = 1;
-		}elseif(!$arr[0] && $arr[1]){
+		}elseif(!$arr[0]){
 			$tmpKey = $tmp.$tmpCount;
+			$tmpStr = "";
 			for ($i = 0; $i < count($arr); $i++) {
-				$resultArr[$tmpKey] .= $arr[$i]." ";
+				$tmpStr .= $arr[$i]." ";
+			}
+			if(!isset($resultArr[$tmpKey])){
+				$resultArr[$tmpKey] = $tmpStr;
 			}
 			$tmpCount++;
 		}
@@ -40,6 +49,7 @@ foreach ($resultArr as $key => $value) {
 	$jsonArr[$i] = $arr;
 	$i++;
 }
+print_r($jsonArr);
 $jsonArr = json_encode($jsonArr);
 echo $jsonArr;
 ?>

@@ -1,0 +1,34 @@
+[
+    {
+        "statement": "Which one of the following is a search engine?",
+        "options": {
+            "A": "Google",
+            "B": "Woogle",
+            "C": "Dogpile",
+            "D": "None of the above"
+		},
+        "answers" : "A C",
+        "id" : "1"
+    },
+    {
+        "statement": "Which one of the following is a State within U.S.A.?",
+        "options": {
+            "A": "New Jersey",
+            "B": "Michigan",
+            "C": "Austin"
+		},
+        "answers" : "A B",
+        "id" : "2"
+    },
+    {
+        "statement": "Which one of the following is Captial City of U.S.A.?",
+        "options": {
+            "A": "Chicago",
+            "B": "Seattle",
+            "C": "New York",
+            "D": "Washington"
+		},
+        "answers" : "D",
+        "id" : "3"
+    }
+]

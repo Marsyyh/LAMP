@@ -5,11 +5,10 @@ function readData() {
 	$.ajax({				//jquery read file from url
 			type:"POST",
 			url:"rcs/spices.php",
-			data:"json",
+			dataType:"json",
 			async:false,
-			success:function(result){
-				jsonData = result;
-				console.log(jsonData);
+			success:function(data){
+				jsonData = data;
 			}
 	});
 }
