@@ -1,5 +1,5 @@
 <?php
-$resultArr;
+$resultArr = [];
 if($fileholder = fopen("spices.txt","r")){
 	while(!feof($fileholder)){
 		$str = fgets($fileholder);
@@ -35,21 +35,29 @@ if($fileholder = fopen("spices.txt","r")){
 $jsonArr;
 $i=0;
 foreach ($resultArr as $key => $value) {
+	if($value == " "){
+		continue;
+	}
 	$arr = explode(".",$key);
 	if ($arr[1]) {
-		$level = count(explode(".",trim($key)));
+		$level = count($arr);
 	}else{
 		$level = 1;
+		$key = substr($key,0,-1);
 	}
-	if(count($key) == 2){
-		$cate = [];
+	$cate = [];
+	$cateT = "";
+	if(count($arr) >= 2 && $arr[1]!= ""){
+		for ($j = 0; $j < count($arr)-1; $j++) {
+			$cateT .= $arr[$j].".";
+		}
+		$cateT = substr($cateT,0,-1);
+		$cate[0] = $cateT;
 	}
-	$cate[0] = substr($key,0,-2);
 	$arr = array("id"=>$key,"name"=>$value,"Categorize"=>$cate,"level"=>$level);
 	$jsonArr[$i] = $arr;
 	$i++;
 }
-print_r($jsonArr);
 $jsonArr = json_encode($jsonArr);
 echo $jsonArr;
 ?>
