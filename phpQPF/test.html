@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+  </head>
+
+  <body>
+    <h1>Compile dynamic HTML</h1>
+    <div ng-controller="MyController">
+      <textarea ng-model="html"></textarea>
+      <div dynamic="html"></div>
+    </div>
+          <script type="text/javascript">
+            var app = angular.module('app', []);
+      app.directive('dynamic', function ($compile) {
+        return {
+          restrict: 'A',
+          replace: true,
+          link: function (scope, ele, attrs) {
+            scope.$watch(attrs.dynamic, function(html) {
+              ele.html(html);
+              $compile(ele.contents())(scope);
+            });
+          }
+        };
+      });
+
+      function MyController($scope) {
+        $scope.click = function(arg) {
+          console.log('Clicked ' + arg);
+        }
+        $scope.html = '<a ng-click="click(1)" href="#">Click me</a>';
+      }
+          </script>
+
+  </body>
+
+</html>

@@ -1,4 +1,5 @@
-<!DOCTYPE html> <html>
+<!DOCTYPE html> 
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>Quick Product Finder</title>
@@ -8,19 +9,21 @@
 </head>
 <body ng-app="app">
 	<div class="wrapper">
-		<div class="row" style="border-width: 1px; border: solid;" ng-controller="myCtrl">
+		<div class="row" style="border-width: 1px; border: solid;">
+			<div class="col-md-2" ng-controller="column1">
+				<div ng-repeat="item in items">{{item.name}}</div>
+			</div>	
+			<div class="col-md-2" ng-controller="column2">
+				<div ng-repeat="item in items">{{item.name}}</div>
+			</div>
 			<div class="col-md-2">
-				<div  ng-repeat="item in items">
-					{{ item.name }}	
-				</div>
+
 			</div>
-			<div class="col-md-2 column2">
- 			</div>
-			<div class="col-md-2 column3">
+			<div class="col-md-2">
+
 			</div>
-			<div class="col-md-2 column4">
-			</div>
-			<div class="col-md-2 column5">
+			<div class="col-md-2">
+
 			</div>
 		</div>
 		<div class="row">
