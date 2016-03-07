@@ -36,32 +36,33 @@ var myApp = angular.module('app',[]);
 //Creating a sharing service
 myApp.factory('sharingDataService',['$http','$rootScope',function($http,$rootScope){
 	var sharedService = {};
-	sharedService.tmpData = "";
+	//------getting data from server //  In service and can be shared this with all controllers
 	sharedService.getDataFromServer = function(){
-		$http({
+		var request = $http({
 			method:'POST',
 			url:'rcs/spices.json',
 		}).then(function(response){
-			this.tmpData = response.data;
-			console.log("response status: " + response.status);
+			return response.data;
 		},function(response){
-			this.tmpData = response.data || "Request failed";
+			return response.data || "Request failed";
 			console.log("Error: " + response.status);
 		});
-		this.broadcastItem();
+		return request;
+		//this.broadcastItem();
 	};
-	 sharedService.broadcastItem = function(){
-		$rootScope.$broadcast('handleBroadcast');
-	 };
+	 // sharedService.broadcastItem = function(){
+		// $rootScope.$broadcast('handleBroadcast');
+	 // };
 	return sharedService;
 }]).
 controller('column1', ['$scope','sharingDataService', function($scope,sharingDataService){
 	var dataHolder = [];
-	sharingDataService.getDataFromServer();
-	$scope.$on('handleBroadcast',function () {
-		dataHolder = sharingDataService.tmpData;
+	sharingDataService.getDataFromServer().then(function(response){
+	//$scope.$on('handleBroadcast',function () {
+		dataHolder = response;
 		$scope.items = dataHolder;
-	})
+	});
+	//})
 }])
 .controller('column2', ['$scope','$http', function($scope,$http){
 	$http({
