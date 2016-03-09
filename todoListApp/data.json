@@ -1,0 +1,26 @@
+[
+	{
+		"id":"1",
+		"firstName":"John",
+		"lastName":"Happy",
+		"email":"john@marlabs.com",
+		"type":"admin",
+		"password":"aaaabbbb&&&&ccc"
+	},
+	{
+		"id":"2",
+		"firstName":"John",
+		"lastName":"Happy",
+		"email":"john@marlabs.com",
+		"type":"admin",
+		"password":"aaaabbbb&&&&ccc"
+	},
+	{
+		"id":"3",
+		"firstName":"John",
+		"lastName":"Happy",
+		"email":"john@marlabs.com",
+		"type":"admin",
+		"password":"aaaabbbb&&&&ccc"
+	}
+]
