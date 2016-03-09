@@ -11,19 +11,19 @@
 	<div class="wrapper">
 		<div class="row" style="border-width: 1px; border: solid;">
 			<div class="col-md-2" ng-controller="column1">
-				<div ng-repeat="item in items" ng-click="expression">{{item.name}}</div>
+				<div ng-repeat="item in items" ng-mouseup="c1Click(item.id);">{{item.name}}</div>
 			</div>	
 			<div class="col-md-2" ng-controller="column2">
-				<div ng-repeat="item in items">{{item.name}}</div>
+				<div ng-repeat="item in items" ng-click="c2Click(item.id);">{{item.name}}</div>
 			</div>
-			<div class="col-md-2">
-
+			<div class="col-md-2" ng-controller="column3">
+				<div ng-repeat="item in items" ng-click="c3Click(item.id);">{{item.name}}</div>
 			</div>
-			<div class="col-md-2">
-
+			<div class="col-md-2" ng-controller="column4">
+				<div ng-repeat="item in items" ng-click="c4Click(item.id);">{{item.name}}</div>
 			</div>
-			<div class="col-md-2">
-
+			<div class="col-md-2" ng-controller="column5">
+				<div ng-repeat="item in items" ng-click="c5Click(item.id);">{{item.name}}</div>
 			</div>
 		</div>
 		<div class="row">

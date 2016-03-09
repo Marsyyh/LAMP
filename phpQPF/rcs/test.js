@@ -5,6 +5,7 @@ var myApp = angular.module('app',[]);
 myApp.factory('sharingDataService',['$http','$rootScope',function($http,$rootScope){
 	var sharedService = {};
 	//------getting data from server //  In service and can be shared this with all controllers
+	sharedService.id = '';
 	sharedService.getDataFromServer = function(callInData){
 		var request = $http({
 			method:'POST',
@@ -20,11 +21,16 @@ myApp.factory('sharingDataService',['$http','$rootScope',function($http,$rootSco
 			console.log("Error: " + response.status);
 		});
 		return request;
-		//this.broadcastItem();
 	};
-	 // sharedService.broadcastItem = function(){
-		// $rootScope.$broadcast('handleBroadcast');
-	 // };
+	//---------------------
+	sharedService.handleClick = function(id){
+		this.id = id;
+		this.broadcastItem();
+	};
+	//---------------------
+	sharedService.broadcastItem = function(){
+		$rootScope.$broadcast('handleBroadcast');
+	};
 	return sharedService;
 }]).
 controller('column1', ['$scope','sharingDataService', function($scope,sharingDataService){
@@ -34,24 +40,35 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 	};
 	//------------using getData function from sharingDataService
 	sharingDataService.getDataFromServer(callInData).then(function(response){
-	//$scope.$on('handleBroadcast',function () {
 		dataHolder = response;
 		$scope.items = dataHolder;
 	});
-	//})
+	//------------creating the click function
+	$scope.c1Click = function(id){
+		sharingDataService.handleClick(id);
+	};
 }])
-.controller('column2', ['$scope','$http', function($scope,$http){
-	$http({
-			method:'POST',
-			url:'rcs/spices.json'
-		}).then(function(response){
-			$scope.items = response.data;
-			console.log("response status: " + response.status);
-		},function(response){
-			$scope.items = response.data || "Request failed";
-			console.log("Error: " + response.status);
+.controller('column2', ['$scope','sharingDataService', function($scope,sharingDataService){
+	$scope.$on('handleBroadcast',function(){
+		var id = sharingDataService.id;
+		var callInData ={
+			"action":"rest",
+			"id":id
+		};
+		sharingDataService.getDataFromServer(callInData).then(function(response){
+			$scope.items = response;
 		});
-}]);
+	});
+}])
+.controller('column3', ['$scope','$http', function($scope,$http){
+	
+}])
+.controller('column4', ['$scope','$http', function($scope,$http){
+	
+}])
+.controller('column5', ['$scope','$http', function($scope,$http){
+	
+}])
 
 
 // myApp.directive('myCustomerDir1',function($compile) {

@@ -85,6 +85,9 @@ function isHttp($data){
 	$postData = file_get_contents('php://input');
 	$request = json_decode($postData);
 	$action = $request->action;
+	if(!$action){
+		
+	}
 	if($action == 'first'){
 		$tmpArr = [];
 		$count = 0;
@@ -94,6 +97,12 @@ function isHttp($data){
 			}
 		}
 		$callBackData = $tmpArr;
+		$callBackData = json_encode($callBackData);
+		echo $callBackData;
+	}
+	if($action == 'rest'){
+		$id = $request->id;
+		$callBackData = findArr($id,$data);
 		$callBackData = json_encode($callBackData);
 		echo $callBackData;
 	}
