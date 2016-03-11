@@ -26,6 +26,10 @@ myApp.factory('sharingDataService',['$http','$rootScope',function($http,$rootSco
 	sharedService.handleClick1 = function(id){
 		this.id = id;
 		this.broadcastItem1();
+		this.id = "999999";
+		this.broadcastItem2();
+		this.broadcastItem3();
+		this.broadcastItem4();
 	};
 	//---------------------
 	sharedService.broadcastItem1 = function(){
@@ -34,6 +38,9 @@ myApp.factory('sharingDataService',['$http','$rootScope',function($http,$rootSco
 	sharedService.handleClick2 = function(id){
 		this.id = id;
 		this.broadcastItem2();
+		this.id = "999999";
+		this.broadcastItem3();
+		this.broadcastItem4();
 	};
 	//---------------------
 	sharedService.broadcastItem2 = function(){
@@ -42,6 +49,8 @@ myApp.factory('sharingDataService',['$http','$rootScope',function($http,$rootSco
 	sharedService.handleClick3 = function(id){
 		this.id = id;
 		this.broadcastItem3();
+		this.id = "999999";
+		this.broadcastItem4();
 	};
 	//---------------------
 	sharedService.broadcastItem3 = function(){
@@ -81,7 +90,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 		};
 		sharingDataService.getDataFromServer(callInData).then(function(response){
 			var tmpObj = response;
-			$scope.items = tmpObj;
+			$scope.items = response;
 		});
 	});
 	$scope.c2Click = function(id){
@@ -96,8 +105,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 			"id":id
 		};
 		sharingDataService.getDataFromServer(callInData).then(function(response){
-			var tmpObj = response;
-			$scope.items = tmpObj;
+			$scope.items = response;
 		});
 	});
 	$scope.c3Click = function(id){
@@ -112,8 +120,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 			"id":id
 		};
 		sharingDataService.getDataFromServer(callInData).then(function(response){
-			var tmpObj = response;
-			$scope.items = tmpObj;
+			$scope.items = response;
 		});
 	});
 	$scope.c4Click = function(id){
@@ -128,8 +135,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 			"id":id
 		};
 		sharingDataService.getDataFromServer(callInData).then(function(response){
-			var tmpObj = response;
-			$scope.items = tmpObj;
+			$scope.items = response;
 		});
 	});
 }])
