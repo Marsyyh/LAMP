@@ -14,10 +14,10 @@ define("user_PASSWORD","user.PASSWORD");
 define("user_SALT","user.SALT");
 define("user_TYPE","user.TYPE");
 define("user_ENABLED","user.ENABLED");
-define("todo_ID","todo.ID");
-define("todo_DESCRIPTION","todo.DESCRIPTION");
-define("todo_DATE","todo.DATE");
-define("todo_STATUS","todo.STATUS");
+define("todo_ID","id");
+define("todo_DESCRIPTION","desc");
+define("todo_DATE","date");
+define("todo_STATUS","status");
 
 define("todo_status_NOT_STARTED","Not Started");
 define("todo_status_STARTED","Started");

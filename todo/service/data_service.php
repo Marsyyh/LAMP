@@ -57,10 +57,9 @@ function get_user($userName){
 /**
  	TODO Methods
 */
-function new_todo($desc, $date, $owner) {
-	$id = generate_todo_id();
-
-	$todo = create_todo_object($id,$desc,$owner);
+function new_todo($desc, $date) {
+	$id = generate_todo_id(); // 1#
+	$todo = create_todo_object($id,$desc,$date);
 	save_todo_object($todo);
 
 	return $todo;

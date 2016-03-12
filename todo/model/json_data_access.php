@@ -9,7 +9,7 @@ $users_db_file = __DIR__ . "/../data/users.json";
 $users_json_string = file_get_contents($users_db_file);
 $usersDB = json_decode($users_json_string);
 
-$todosDB = array();
+$todosDB = false;
 
 function get_current_user_id(){
 	if(session_id() == '' || !isset($_SESSION)) {
@@ -116,8 +116,19 @@ function init_todos_db(){
 
 
 function save_todo_object($todo){
+	global $todosDB;
 	init_todos_db();
+	$todosDB["nextId"]++;
+	array_push($todosDB["todos"],$todo);
+	$todos_db_file = __DIR__ . "/../data/ares.json";
+	$fp = fopen($todos_db_file,'w');
+	if(!$fp){
+		echo "there is some error";
+	}else{
+		fwrite($fp, json_encode($todosDB));
+		fclose($fp);
 	//write JSON record
+	}
 }
 
 function get_todo_object($id){
@@ -131,6 +142,10 @@ function get_todo_array($user){
 }
 
 function generate_todo_id(){
+	global $todosDB;
+	init_todos_db();
+	$nextID = $todosDB['nextId'];
+	return $nextID;
 	//
 }
 

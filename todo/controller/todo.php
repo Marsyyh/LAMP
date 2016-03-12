@@ -1,10 +1,11 @@
 <?php
 
-require_once("../config/constants.php");
-require_once('../utils/utils.php');
-require_once('../utils/security_utils.php');
-require_once('../da/data_access.php');
-require_once('../validation/validators.php');
+require_once(__DIR__ . "/../config/constants.php");
+//require_once('../utils/utils.php');
+//require_once('../utils/security_utils.php');
+//require_once('../da/data_access.php');
+require_once(__DIR__ . "/../util/validators.php");
+require_once(__DIR__ . "/../service/data_service.php");
 
 session_start();
 
@@ -17,18 +18,15 @@ if ($action == "Add") {
     if (isset($_POST["description"])) {
         $description = $_POST["description"];
         //validate task description
-        $valid = validateRequired($description);
+        //$valid = validateRequired($description);
+        $valid = true;
         if ($valid) {
             $scheduledDate = time();
             if (isset($_POST["scheduledDate"]) && strlen(trim($_POST["scheduledDate"])) > 0) {
                 $scheduledDate = strtotime($_POST["scheduledDate"]);
             }
-
-            $task = [];
-            $task["description"] = $description;
-            $task["scheduledDate"] = $scheduledDate;            
-            $userId = $_SESSION["userId"];
-            newTask($task, $userId);
+            new_todo($description,$scheduledDate);
+            //newTask($task, $userId);
         } else {
             $_SESSION["error"] = "Task description is required and can have upto 120 characters";
         }
