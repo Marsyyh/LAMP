@@ -120,7 +120,8 @@ function save_todo_object($todo){
 	init_todos_db();
 	$todosDB["nextId"]++;
 	array_push($todosDB["todos"],$todo);
-	$todos_db_file = __DIR__ . "/../data/ares.json";
+	$currentUserId = get_current_user_id();
+	$todos_db_file = __DIR__ . "/../data/${currentUserId}.json";
 	$fp = fopen($todos_db_file,'w');
 	if(!$fp){
 		echo "there is some error";
