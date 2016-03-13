@@ -95,7 +95,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 	});
 	$scope.c2Click = function(id){
 		sharingDataService.handleClick2(id);
-	}
+	};
 }])
 .controller('column3', ['$scope','sharingDataService', function($scope,sharingDataService){
 	$scope.$on('handleBroadcast2',function(){
@@ -110,7 +110,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 	});
 	$scope.c3Click = function(id){
 		sharingDataService.handleClick3(id);
-	}
+	};
 }])
 .controller('column4', ['$scope','sharingDataService', function($scope,sharingDataService){
 	$scope.$on('handleBroadcast3',function(){
@@ -125,7 +125,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 	});
 	$scope.c4Click = function(id){
 		sharingDataService.handleClick4(id);
-	}
+	};
 }])
 .controller('column5', ['$scope','sharingDataService', function($scope,sharingDataService){
 	$scope.$on('handleBroadcast4',function(){
@@ -138,7 +138,7 @@ controller('column1', ['$scope','sharingDataService', function($scope,sharingDat
 			$scope.items = response;
 		});
 	});
-}])
+}]);
 
 
 // myApp.directive('myCustomerDir1',function($compile) {

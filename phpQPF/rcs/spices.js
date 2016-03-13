@@ -23,7 +23,7 @@ function appendInitialDiv() {
 	var count = 0;
 	var out = "";
 	for(var i=0;i<jsonData.length;i++){
-		var checkLevel = jsonData[i].level
+		var checkLevel = jsonData[i].level;
 		if( checkLevel == level){
 			var id = jsonData[i].id;
 			out +="<div style=\"background-color:hsl("+count*120+",100%,30%)\" onclick=\x22appendWithPara(\'"+id+"\');\x22>"+jsonData[i].name+"</div>";

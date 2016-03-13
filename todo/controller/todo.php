@@ -25,7 +25,7 @@ if ($action == "Add") {
             if (isset($_POST["scheduledDate"]) && strlen(trim($_POST["scheduledDate"])) > 0) {
                 $scheduledDate = strtotime($_POST["scheduledDate"]);
             }
-            new_todo($description,$scheduledDate);
+            new_todo($description,date('m-d-Y',$scheduledDate));
             //newTask($task, $userId);
         } else {
             $_SESSION["error"] = "Task description is required and can have upto 120 characters";
