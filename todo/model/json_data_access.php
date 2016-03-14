@@ -150,6 +150,9 @@ function generate_todo_id(){
 	//
 }
 
-get_todo_array(null);
+function get_todos_array($id){
+	global $todosDB;
+	init_todos_db();
 
+}
 ?>

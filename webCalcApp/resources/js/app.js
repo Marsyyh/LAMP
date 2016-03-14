@@ -1,65 +1,25 @@
 var myApp = angular.module('myCal',[]);
 
-myApp.controller('myCalController', ['$scope', function($scope){
+myApp.controller('myCalController', ['$scope','$http','$location', function($scope,$http,$location){
 	$scope.myScreen = '';
-
-	$scope.click1 = function(){
-		$scope.myScreen = $scope.myScreen + '1';
+	$scope.clickUpdate = function(number) {
+		$scope.myScreen += number;
 	};
-
-	$scope.click2 = function(){
-		$scope.myScreen = $scope.myScreen + '2';
-	};
-
-	$scope.click3 = function(){
-		$scope.myScreen = $scope.myScreen + '3';
-	};
-
-	$scope.click4 = function(){
-		$scope.myScreen = $scope.myScreen + '4';
-	};
-
-	$scope.click5 = function(){
-		$scope.myScreen = $scope.myScreen + '5';
-	};
-
-	$scope.click6 = function(){
-		$scope.myScreen = $scope.myScreen + '6';
-	};
-
-	$scope.click7 = function(){
-		$scope.myScreen = $scope.myScreen + '7';
-	};
-
-	$scope.click8 = function(){
-		$scope.myScreen = $scope.myScreen + '8';
-	};
-
-	$scope.click9 = function(){
-		$scope.myScreen = $scope.myScreen + '9';
-	};
-
-	$scope.clickPlus = function(){
-		$scope.myScreen = $scope.myScreen + '+';
-	};
-
-	$scope.clickMinus = function(){
-		$scope.myScreen = $scope.myScreen + '-';
-	};
-
-	$scope.clickMulti = function(){
-		$scope.myScreen = $scope.myScreen + '×';
-	};
-
-	$scope.clickDiv = function(){
-		$scope.myScreen = $scope.myScreen + '/';
-	};
-
 	$scope.clickClear = function(){
 		$scope.myScreen = '';
 	};
-
 	$scope.clickEqul = function(){
-
+		var callInData = {
+			"action":"string",
+			"calString":$scope.myScreen
+		};
+		$http({
+			method:'POST',
+			data:callInData,
+			url:'controller/cal.php'
+		})
+		.then(function successCallback(response){
+			$scope.myScreen = response.data;
+		});
 	};
 }]);

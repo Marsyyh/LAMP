@@ -18,4 +18,20 @@ function hasRequiredLength($value, $noChars) {
     return $valid;
 }
 
+function validateRequired($scheduledDate){
+    // validate the date with space comma .....
+    $validateDateArr = preg_split("/[\s-:;\/.,]+/", $scheduledDate);
+    if(count($validateDateArr)!=3){
+        return false;
+    }else{
+        $month = $validateDateArr[0];
+        $day = $validateDateArr[1];
+        $year = $validateDateArr[2];
+        if(checkdate($month,$day,$year)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
 ?>

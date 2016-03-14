@@ -9,7 +9,6 @@ require_once(__DIR__ . "/../service/data_service.php");
 $tasks = array();
 if(isset($_SESSION[CURRENT_USER])){
     $userId = $_SESSION[CURRENT_USER];
-    
     $tasks = get_todos($userId);
 }
 require_once("header.php");

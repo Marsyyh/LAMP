@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <?php
-require_once("../config/constants.php");
-require_once("../utils/ensure_session.php");
-require_once("../da/data_access.php");
-session_start();
-$userId = $_SESSION["userId"];
+require_once(__DIR__."/../config/constants.php");
+//require_once(__DIR__."/../controller/ensure_session.php");
+require_once(__DIR__."/../service/data_service.php");
+//session_start();
+//$userId = $_SESSION["userId"];
 if (!isset($_SESSION["taskId"])) {
-    redirect(VIEW . "/home.php");
+    redirect(VIEWS . "/home.php");
 }
-
 $taskId = $_SESSION["taskId"];
-$task = getTask($taskId);
-unset($_SESSION["taskId"]);
+$task = get_todo($taskId);
+var_dump($task);
+die();
+//unset($_SESSION["taskId"]);
 ?>
 <html lang="en">
     <head>
@@ -67,7 +68,7 @@ unset($_SESSION["taskId"]);
         </div>
 
         <div class="container">
-            <form action="<?php echo CONTROLLER . "/task_controller.php" ?>" method="POST">
+            <form action="<?php echo CONTROLLER . "/todo.php" ?>" method="POST">
                 <div class="row" style="margin-top:20px">
                     <div class="col-xs-12">
                         <h4>Update Task</h4>

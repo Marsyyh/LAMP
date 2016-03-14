@@ -3,12 +3,10 @@
 require_once(__DIR__ . "/../config/constants.php");
 //require_once('../utils/utils.php');
 //require_once('../utils/security_utils.php');
-//require_once('../da/data_access.php');
 require_once(__DIR__ . "/../util/validators.php");
 require_once(__DIR__ . "/../service/data_service.php");
 
-session_start();
-
+//session_start();
 if (!isset($_POST["action"])) {
     redirect(VIEWS . "/home.php");
 }
@@ -17,18 +15,17 @@ $action = $_POST["action"];
 if ($action == "Add") {
     if (isset($_POST["description"])) {
         $description = $_POST["description"];
-        //validate task description
-        //$valid = validateRequired($description);
-        $valid = true;
+        //validate task date
+        $scheduledDate = $_POST["scheduledDate"];
+        $valid = validateRequired($scheduledDate);
         if ($valid) {
-            $scheduledDate = time();
             if (isset($_POST["scheduledDate"]) && strlen(trim($_POST["scheduledDate"])) > 0) {
-                $scheduledDate = strtotime($_POST["scheduledDate"]);
+                $scheduledDate = strtotime($scheduledDate);
             }
+            //------------------End validationdate ---------
             new_todo($description,date('m-d-Y',$scheduledDate));
-            //newTask($task, $userId);
         } else {
-            $_SESSION["error"] = "Task description is required and can have upto 120 characters";
+            $_SESSION["error"] = "Task date input incorrectly";
         }
     }
     redirect(VIEWS . "/home.php");
