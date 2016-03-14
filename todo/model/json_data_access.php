@@ -132,8 +132,51 @@ function save_todo_object($todo){
 	}
 }
 
-function get_todo_object($id){
+function update_todo_object($desc,$stat,$taskId){
+	global $todosDB;
+	switch ($stat) {
+		case 'N':
+			$stat = todo_status_NOT_STARTED;
+			break;
+		case 'S':
+			$stat = todo_status_STARTED;
+			break;
+		case 'M':
+			$stat = todo_status_MIDWAY;
+			break;
+		case 'C':
+			$stat = todo_status_COMPLETE;
+			break;
+		default:
+			break;
+	}
 	init_todos_db();
+	for ($i=0; $i < count($todosDB['todos']); $i++) { 
+		global $todosDB;
+		if($todosDB['todos'][$i]['id']==$taskId){
+			$todosDB['todos'][$i]['desc'] = $desc;
+			$todosDB['todos'][$i]['status'] = $stat;
+		}
+	}
+	$currentUserId = get_current_user_id();
+	$todos_db_file = __DIR__ . "/../data/${currentUserId}.json";
+	$fp = fopen($todos_db_file,'w');
+	if(!$fp){
+		echo "there is some error";
+	}else{
+		fwrite($fp, json_encode($todosDB));
+		fclose($fp);
+	}
+}
+
+function get_todo_object($id){
+	global $todosDB;
+	init_todos_db();
+	for ($i=0; $i < count($todosDB['todos']); $i++) { 
+		if($todosDB['todos'][$i]['id']==$id){
+			return $todosDB['todos'][$i];
+		}
+	}
 }
 
 function get_todo_array($user){	

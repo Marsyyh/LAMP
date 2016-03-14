@@ -66,7 +66,7 @@ function new_todo($desc, $date) {
 }
 
 function update_todo($desc,$stat,$taskId){
-	$todo = create_todo_object();
+	update_todo_object($desc,$stat,$taskId);
 }
 
 function get_todos($owner){

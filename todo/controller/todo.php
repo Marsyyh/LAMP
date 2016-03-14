@@ -5,8 +5,7 @@ require_once(__DIR__ . "/../config/constants.php");
 //require_once('../utils/security_utils.php');
 require_once(__DIR__ . "/../util/validators.php");
 require_once(__DIR__ . "/../service/data_service.php");
-
-//session_start();
+require_once(__DIR__ . "/../controller/ensure_session.php");
 if (!isset($_POST["action"])) {
     redirect(VIEWS . "/home.php");
 }
@@ -51,7 +50,7 @@ if ($action == "Add") {
         $taskId = $_POST["taskId"];
         $description = $_POST["description"];
         $status = $_POST["status"];
-        updateTask($description, $status, $taskId);
+        update_todo($description, $status, $taskId);
     } else {
         $_SESSION["error"] = "Select a task";
     }
