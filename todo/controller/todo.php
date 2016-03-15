@@ -14,14 +14,14 @@ $action = $_POST["action"];
 if ($action == "Add") {
     if (isset($_POST["description"])) {
         $description = $_POST["description"];
-        //validate task date
-        $scheduledDate = $_POST["scheduledDate"];
-        $valid = validateRequired($scheduledDate);
-        if ($valid) {
-            if (isset($_POST["scheduledDate"]) && strlen(trim($_POST["scheduledDate"])) > 0) {
-                $scheduledDate = strtotime($scheduledDate);
+        $valid = false;
+        if (isset($_POST["scheduledDate"]) && strlen(trim($_POST["scheduledDate"])) > 0) {
+            //validate task date
+            $scheduledDate = $_POST["scheduledDate"];
+            $valid = validateRequired($scheduledDate);
+            $scheduledDate = strtotime($scheduledDate);
             }
-            //------------------End validationdate ---------
+        if ($valid) {
             new_todo($description,date('m-d-Y',$scheduledDate));
         } else {
             $_SESSION["error"] = "Task date input incorrectly";
