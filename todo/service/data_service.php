@@ -18,11 +18,9 @@ if(DATASOURCE_TYPE === DATASOURCE_JSON){
 //Has to be called before newUser
 function verify_username_availability($userName){
 	$exists = false;
-	/*
-	if(get_user($userName)){
+		if(get_user($userName)){
 		$exists = true;
 	}
-	*/
 	return $exists;
 }
 
