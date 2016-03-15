@@ -1,7 +1,7 @@
 <?php
 require_once("../config/constants.php");
 
-function create_user_object($firstName,$lastName,$email,$password,$salt,$type,$enabled=true){
+function create_user_object($firstName,$lastName,$email,$password,$salt,$userType,$enabled=1){
 	$user = array (
 		user_FIRST_NAME=>$firstName,
 		user_LAST_NAME=>$lastName,

@@ -26,7 +26,32 @@ function get_current_user_id(){
 }
 
 function save_user_object($user){
+	global $usersDB;
+	array_push($usersDB,$user);
+	$users_db_file = __DIR__ . "/../data/users.json";
+	$fp = fopen($users_db_file,'w');
+	if(!$fp){
+		echo "there is some error";
+	}else{
+		fwrite($fp, json_encode($usersDB));
+		fclose($fp);
+	}
 
+	$currentUserId = explode("@",$user['email']);
+	$currentUserId = $currentUserId[0];
+	$todos_db_file = __DIR__ . "/../data/${currentUserId}.json";
+	$fp = fopen($todos_db_file,'w');
+	$todosDB = array(
+		'nextId'=> 1,
+		'todos'=>array()
+		);
+	if(!$fp){
+		echo "there is some error";
+	}else{
+		fwrite($fp, json_encode($todosDB));
+		fclose($fp);
+	//write JSON record
+	} 
 }
 
 function get_user_array(){
@@ -116,12 +141,12 @@ function init_todos_db(){
 function save_todo_object($todo){
 	global $todosDB;
 	init_todos_db();
-	if(count($todosDB['todos'])<=0){
+	$todosDB["nextId"]++;
+	if(count($todosDB['todos'])==0){
 		$todosDB['todos'] = array(0=>$todo);
 	}else{
 		array_push($todosDB["todos"],$todo);
 	}
-	$todosDB["nextId"]++;
 	$currentUserId = get_current_user_id();
 	$todos_db_file = __DIR__ . "/../data/${currentUserId}.json";
 	$fp = fopen($todos_db_file,'w');
@@ -154,7 +179,6 @@ function update_todo_object($desc,$stat,$taskId){
 	}
 	init_todos_db();
 	for ($i=0; $i < count($todosDB['todos']); $i++) { 
-		//global $todosDB;
 		if($todosDB['todos'][$i]['id']==$taskId){
 			$todosDB['todos'][$i]['desc'] = $desc;
 			$todosDB['todos'][$i]['status'] = $stat;
@@ -190,8 +214,7 @@ function get_todo_array($user){
 function generate_todo_id(){
 	global $todosDB;
 	init_todos_db();
-	$nextID = $todosDB['nextId'];
-	return $nextID;
+	return $todosDB['nextId'];
 	//
 }
 

@@ -27,21 +27,21 @@ function verify_username_availability($userName){
 }
 
 function new_todo_user($firstName,$lastName,$email,$password){
-	return new_user($firstName,$lastName,$email,$password,user_type.USER);
+	return new_user($firstName,$lastName,$email,$password,user_type_USER);
 }
 
 function new_admin($firstName,$lastName,$email,$password){
-	return new_user($firstName,$lastName,$email,$password,user_type.ADMIN);
+	return new_user($firstName,$lastName,$email,$password,user_type_ADMIN);
 }
 
 //Username is assumed to be unique. Private. //Ensure that $email does not exist in the system
 function new_user($firstName,$lastName,$email,$password,$userType){	
 	$salt = generate_salt();
 	$encPassword = encrypt_password($password,$salt);
-	
-	$user = create_user_object($firstName,$lastName,$email,$encPassword,$userType);
-	save_user_object($user);
-
+	if($userType === user_type_USER){
+		$user = create_user_object($firstName,$lastName,$email,$encPassword,$salt,$userType);
+		save_user_object($user);
+	}
 	return $user;
 }
 
