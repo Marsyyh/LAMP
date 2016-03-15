@@ -77,4 +77,7 @@ function get_todo($id){
 	return get_todo_object($id);
 }
 
+function delete_todo($id){
+	delete_todo_object($id);
+}
 ?>

@@ -40,7 +40,7 @@ if ($action == "Add") {
 } else if ($action == "Delete") {
     if (isset($_POST["taskId"])) {
         $taskId = $_POST["taskId"];
-        deleteTask($taskId);
+        delete_todo($taskId);
     } else {
         $_SESSION["error"] = "Select a task";
     }
