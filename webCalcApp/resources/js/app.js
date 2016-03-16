@@ -23,6 +23,8 @@ myApp.controller('myCalController', ['$scope','$http','$location', function($sco
 	$scope.clickEqul = function(){
 		var tmp = $scope.myScreen.split(/[\+\-\*\/]+/);
 		numberHolder.push(tmp[tmp.length-1]);
+		console.log(numberHolder);
+		console.log(operatorHolder);
 		var callInData = {
 			"action":"string",
 			"calNumber":numberHolder,
