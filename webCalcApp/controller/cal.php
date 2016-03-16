@@ -16,8 +16,12 @@ function isHttp(){
 				$calNumber[$i] *= $calNumber[$i+1];
 				unsetFuc($i--);
 			}elseif($calOperator[$i]=='/'){
-				$calNumber[$i] /= $calNumber[$i+1];
-				unsetFuc($i--);
+				if($calNumber[$i+1] && $calNumber[$i+1]!=0){
+					$calNumber[$i] /= $calNumber[$i+1];
+					unsetFuc($i--);
+				}else{
+					echo "Wrong Input";
+				}
 			}
 		}
 		for($i=0;$i<count($calOperator);$i++){
