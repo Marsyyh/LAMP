@@ -1,0 +1,14 @@
+#map {
+        height: 420px;
+}
+input{
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0px 11px 0 13px;
+    margin: 50px 0px 0px 0px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
