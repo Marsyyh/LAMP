@@ -13,6 +13,7 @@
 		<div class="col-md-3">
 			<input ng-model="earthQuakeCityInput" id="input" ng-keypress="handleEnterPress($event)"></input>
 			<div ng-repeat="item in items">
+				<a herf='#' ng-click="openInfoWindow($event,item)">{{item.title}}</a>
 				<p>{{item.eqid}}</p>
 				<p>{{item.datetime}}</p>
 			</div>
