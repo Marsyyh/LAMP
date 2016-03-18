@@ -12,3 +12,8 @@ input{
     text-overflow: ellipsis;
     width: 300px;
 }
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}

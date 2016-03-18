@@ -8,6 +8,7 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
     var markers = [];
  	var input = document.getElementById('input');
     var autoComplete = new google.maps.places.Autocomplete(input);
+    var infoWindow = new google.maps.InfoWindow();
     $scope.earthQuakeMap = new google.maps.Map(document.getElementById('map'), mapOptions);
     autoComplete.bindTo('bounds',$scope.earthQuakeMap);
 
@@ -44,7 +45,16 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
 			position: {'lat':info.lat,'lng':info.lng},
 			title: info.magnitude.toString()
 		});
+
+		marker.content = '<div class="infoWindowContent">'+info.datetime+'</div>';
+		google.maps.event.addListener(marker,'click',function(){
+			infoWindow.setContent('<h2>'+marker.title+'</h2>'+marker.content);
+			infoWindow.open($scope.earthQuakeMap,marker);
+		});
+
+
 		markers.push(marker);
+
 	};
 
 	var setMapOnAll = function(map){
