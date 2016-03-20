@@ -5,21 +5,39 @@
 	<meta name="viewport" content="initial-scale=1.0">
 	<title>Earth Quake</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="rcs/app.css"></link>
 </head>
 <body ng-app="earthQuake">
-	<div ng-controller="myEarthQuakeCtrl" class="row">
-		<div class="col-md-3">
-			<input ng-model="earthQuakeCityInput" id="input" ng-keypress="handleEnterPress($event)"></input>
-			<div ng-repeat="item in items">
-				<a herf='#' ng-click="openInfoWindow($event,item)">{{item.title}}</a>
-				<p>{{item.eqid}}</p>
-				<p>{{item.datetime}}</p>
+	
+	<header>
+		<h1>Earthquake finder</h1>
+	</header>
+
+	<div class="grid">
+		<h2>Largest earthquake in US (soft by magnitude & time)</h2>
+		<div ng-controller="earthQuake" class="grid_row">
+			<div class="grid_column_1" ng-repeat="earthQuake in american">
+				Time:{{earthQuake.datetime}}<br>
+				Magnitude:{{earthQuake.magnitude}}<br>
+				Location:({{earthQuake.lat}},{{earthQuake.lng}})<br>
+				Depth:{{earthQuake.depth}}
 			</div>
 		</div>
-		<div ng-model="earthQuakeMap" class="col-md-8" id="map"></div>
+		<div ng-controller="myEarthQuakeCtrl" class="grid_row">
+			<div class="grid_column_1 grid_column">
+				<input ng-model="earthQuakeCityInput" id="input" ng-keypress="handleEnterPress($event)"></input>
+				<div ng-repeat="item in items">
+					<a herf='#' ng-click="openInfoWindow($event,item)">{{item.title}}</a>
+					<p>{{item.eqid}}</p>
+					<p>{{item.datetime}}</p>
+				</div>
+			</div>
+			<div ng-model="earthQuakeMap" class="grid_column_3 grid_column" id="map"></div>
+		</div>
 	</div>
+
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script type="text/javascript" src="rcs/app.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD7XwBx03YPor9mMYphg1Lr6U1GnVbnQIU&libraries=places"></script>

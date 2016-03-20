@@ -9,6 +9,7 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
  	var input = document.getElementById('input');
     var autoComplete = new google.maps.places.Autocomplete(input);
     var infoWindow = new google.maps.InfoWindow();
+    $scope.earthQuakeCityInput = 'Input city name you want to search :)';
     $scope.earthQuakeMap = new google.maps.Map(document.getElementById('map'), mapOptions);
     autoComplete.bindTo('bounds',$scope.earthQuakeMap);
 
@@ -21,7 +22,6 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
     		$scope.earthQuakeMap.setCenter(place.geometry.location);
     		$scope.earthQuakeMap.setZoom(8);
     		clearMaker();
-    		console.log($scope.earthQuakeMap.getBounds());
     		var mapBounds = {
     			'east':$scope.earthQuakeMap.getBounds().getNorthEast().lng(),
     			'west':$scope.earthQuakeMap.getBounds().getSouthWest().lng(),
@@ -37,7 +37,7 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
 
     		$scope.handleEnterPress = function($event){
     			if($event.which ==13){
-    				$scope.earthQuakeCityInput = latLng.lat;
+    				$scope.earthQuakeCityInput = $scope.earthQuakeMap.getBounds();
     			}
     		};
  	    }
@@ -70,6 +70,17 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
 		setMapOnAll(null);
 		markers = [];
 	};
+})
+.controller('earthQuake',function($scope,myEarthQuakeGeoApiService){
+	var mapBounds = {
+    	'east':-62.5,
+    	'west':-125.4,
+    	'north':52.1,
+    	'south':24.7,
+    };
+    myEarthQuakeGeoApiService.callGeoApi(mapBounds).then(function(response){
+    	$scope.american = response.earthquakes;
+    });
 })
 .factory('myEarthQuakeGeoApiService',function($http,$rootScope){
 	var myEarthQuakeGeoApiService = {};

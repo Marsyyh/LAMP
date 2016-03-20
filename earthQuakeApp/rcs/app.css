@@ -1,5 +1,15 @@
+body, html{
+	height:100%;
+}
+header{
+	text-align: center;
+	font-size: 
+}
 #map {
         height: 420px;
+}
+h2{
+	flex-basis: 100%;
 }
 input{
     background-color: #fff;
@@ -17,3 +27,18 @@ input{
     border-top: 1px solid #ccc;
     padding-top: 10px;
 }
+
+.grid_row{
+	display: flex;
+	margin-bottom: 2em;
+}
+.grid_column{
+	padding: 40px;
+}
+.grid_column_1{
+	flex:1;
+}
+.grid_column_3{
+	flex:4;
+}
+
