@@ -19,13 +19,16 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
 
   		}else{
     		$scope.earthQuakeMap.setCenter(place.geometry.location);
-    		$scope.earthQuakeMap.setZoom(5);
+    		$scope.earthQuakeMap.setZoom(8);
     		clearMaker();
-    		var latLng = {
-    			'lat':place.geometry.location.lat(),
-    			'lng':place.geometry.location.lng()
+    		console.log($scope.earthQuakeMap.getBounds());
+    		var mapBounds = {
+    			'east':$scope.earthQuakeMap.getBounds().getNorthEast().lng(),
+    			'west':$scope.earthQuakeMap.getBounds().getSouthWest().lng(),
+    			'north':$scope.earthQuakeMap.getBounds().getNorthEast().lat(),
+    			'south':$scope.earthQuakeMap.getBounds().getSouthWest().lat(),
     		};
-    		myEarthQuakeGeoApiService.callGeoApi(latLng.lat,latLng.lng).then(function(response){
+    		myEarthQuakeGeoApiService.callGeoApi(mapBounds).then(function(response){
     			$scope.items = response.earthquakes;
     			for (var i = $scope.items.length - 1; i >= 0; i--) {
     				createMarker($scope.items[i]);
@@ -70,12 +73,13 @@ app.controller('myEarthQuakeCtrl',function($scope, myEarthQuakeGeoApiService){
 })
 .factory('myEarthQuakeGeoApiService',function($http,$rootScope){
 	var myEarthQuakeGeoApiService = {};
-	myEarthQuakeGeoApiService.callGeoApi = function(lat,lng){
+	myEarthQuakeGeoApiService.callGeoApi = function(mapBounds){
+		console.log(mapBounds);
 		var data = {
-			'east':lng + 10,
-			'west':lng - 10,
-			'north':lat + 10,
-			'south':lat - 10,
+			'east':mapBounds.east,
+			'west':mapBounds.west,
+			'north':mapBounds.north,
+			'south':mapBounds.south,
 			'username':'y86528977'
 		};
 		var url = 'http://api.geonames.org/earthquakesJSON?east='+data.east+'&west='+data.west+'&north='+data.north+'&south='+data.south+'&username=y86528977';
